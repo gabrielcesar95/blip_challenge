@@ -1,16 +1,20 @@
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
+using Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
+
 builder.Services.AddDbContext<RepositoryContext>(opt =>
     opt.UseInMemoryDatabase("GithubCLient"));
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Dependency Injections
+builder.Services.AddScoped<App.Features.Contracts.Repository.IRepositoryListFeature, Api.Features.RepositoryListFeature>();
 
 var app = builder.Build();
 
