@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 // Dependency Injections
 builder.Services.AddScoped<App.Features.Contracts.Repository.IRepositoryListFeature, Api.Features.RepositoryListFeature>();
+builder.Services.AddScoped<Api.Repositories.GithubApi.Contracts.IRepository, Api.Repositories.GithubApi.Repository>();
 
 var app = builder.Build();
 

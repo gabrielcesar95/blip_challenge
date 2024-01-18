@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Api.Models;
 using App.Features.Contracts.Repository;
 
@@ -22,7 +21,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Repository>>> GetRepositoryItems()
         {
-            var repositories = await _feature.GetRepositoriesAsync();
+            var repositories = await _feature.GetRepositories();
 
             return Ok(repositories);
         }
