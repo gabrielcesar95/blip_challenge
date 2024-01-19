@@ -19,7 +19,8 @@ class RepositoryListFeature : IRepositoryListFeature
 
 
     //TODO: Receber Parâmetros: Linguagem e paginação
-    public async Task<IEnumerable<Repository>> GetRepositories() => await _Repository.GetRepositories();
+    public async Task<IEnumerable<Repository>> ListRepositories() => await _Repository.Get();
+    public async Task<IEnumerable<Repository>> GetRepository() => throw new NotImplementedException();
 
 
     // Referência pra gerenciar o cache em memória
@@ -37,7 +38,7 @@ class RepositoryListFeature : IRepositoryListFeature
 
     public async Task PutRepository(long id, Repository repository)
     {
-        if (id != repository.Id)
+        if (id != repository.id)
         {
             // return BadRequest();
         }
@@ -87,6 +88,6 @@ class RepositoryListFeature : IRepositoryListFeature
 
     private bool RepositoryExists(long id)
     {
-        return _RepositoriesContext.RepositoryItems.Any(e => e.Id == id);
+        return _RepositoriesContext.RepositoryItems.Any(e => e.id == id);
     }
 }

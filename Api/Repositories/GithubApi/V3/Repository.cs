@@ -5,7 +5,7 @@ namespace Api.Repositories.GithubApi.V3;
 
 class Repository : BaseRepository, IRepository
 {
-    public async Task<IEnumerable<Models.Repository>> GetRepositories()
+    public async Task<IEnumerable<Models.Repository>> Get()
     {
         var response = await ListEntities<Models.Repository>("orgs/takenet/repos");
         return response;

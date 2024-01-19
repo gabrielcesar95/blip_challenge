@@ -21,7 +21,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Repository>>> GetRepositoryItems()
         {
-            var repositories = await _feature.GetRepositories().ConfigureAwait(false);
+            var repositories = await _feature.ListRepositories().ConfigureAwait(false);
 
             return Ok(repositories);
         }
