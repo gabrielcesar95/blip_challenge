@@ -18,18 +18,18 @@ public class RestClient
 
     }
 
-    public async Task<List<dynamic>> List(string path)
+    public async Task<IEnumerable<T>> List<T>(string path)
     {
-        List<dynamic> responseValue = [];
+        IEnumerable<T> responseBody = [];
         try
         {
             var response = await Client.GetAsync(path);
-            var responseBody = response.Content.ReadFromJsonAsync<IEnumerable<dynamic>>().Result; // TODO: Substituir esse Dynamic oor um generic type
+            responseBody = response.Content.ReadFromJsonAsync<IEnumerable<T>>().Result; // TODO: Substituir esse Dynamic oor um generic type
         }
         catch (Exception e)
         {
             Console.WriteLine($"deu ruim", e.Message);
         }
-        return responseValue;
+        return responseBody;
     }
 }

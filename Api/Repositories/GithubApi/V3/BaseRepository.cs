@@ -14,9 +14,9 @@ public class BaseRepository : IBaseRepository
         });
     }
 
-    public async Task<List<dynamic>> List(string path)
+    public async Task<IEnumerable<T>> ListEntities<T>(string path)
     {
-        var response = await Client.List(path);
+        var response = await Client.List<T>(path);
 
         return response;
     }

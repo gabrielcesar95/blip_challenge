@@ -19,12 +19,7 @@ class RepositoryListFeature : IRepositoryListFeature
 
 
     //TODO: Receber Parâmetros: Linguagem e paginação
-    public async Task<IEnumerable<Repository>> GetRepositories()
-    {
-        var repositories = _Repository.GetRepositories();
-
-        return await _RepositoriesContext.RepositoryItems.ToListAsync();
-    }
+    public async Task<IEnumerable<Repository>> GetRepositories() => await _Repository.GetRepositories();
 
 
     // Referência pra gerenciar o cache em memória

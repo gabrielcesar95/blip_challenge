@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 public interface IBaseRepository
 {
-    public Task<List<dynamic>> List(string path);
+    public Task<IEnumerable<T>> ListEntities<T>(string path);
 }
