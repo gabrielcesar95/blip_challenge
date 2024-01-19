@@ -1,9 +1,3 @@
-using Api.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using NuGet.Protocol;
-
 namespace Api.Shared.Support;
 
 public class RestClient
@@ -30,17 +24,7 @@ public class RestClient
         try
         {
             var response = await Client.GetAsync(path);
-
-            var responseBody = response.Content.ReadAsStringAsync().Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                var returnedValue = JsonConvert.DeserializeObject<List<dynamic>>(responseBody);
-                if (returnedValue is not null)
-                {
-                    responseValue = returnedValue;
-                }
-            }
+            var responseBody = response.Content.ReadFromJsonAsync<IEnumerable<dynamic>>().Result; // TODO: Substituir esse Dynamic oor um generic type
         }
         catch (Exception e)
         {
