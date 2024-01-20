@@ -22,9 +22,14 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Repository>>> RepositoriesList(string? language, int? page, int? resultsPerPage)
         {
-            var filter = (language is not null) ? new RepositoryFilter() { Language = language } : null;
+            var filter = new RepositoryFilter()
+            {
+                language = language,
+                page = page,
+                perPage = resultsPerPage
+            };
 
-            var repositories = await _feature.ListRepositories(filter, page, resultsPerPage);
+            var repositories = await _feature.ListRepositories(filter);
 
             return Ok(repositories);
         }

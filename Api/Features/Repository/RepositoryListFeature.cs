@@ -20,7 +20,7 @@ class RepositoryListFeature : IRepositoryListFeature
 
 
     //TODO: Receber Parâmetros: Paginação
-    public async Task<IEnumerable<Repository>> ListRepositories(RepositoryFilter? filter, int? page = 1, int? resultsPerPage = 5)
+    public async Task<IEnumerable<Repository>> ListRepositories(RepositoryFilter? filter)
     {
         return await _Repository.Get(filter);
     }

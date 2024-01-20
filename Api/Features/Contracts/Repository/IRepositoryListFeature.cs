@@ -4,5 +4,5 @@ namespace App.Features.Contracts.Repository;
 
 public interface IRepositoryListFeature
 {
-    Task<IEnumerable<Api.Models.Repository>> ListRepositories(RepositoryFilter? filter, int? page = 1, int? resultsPerPage = 5);
+    Task<IEnumerable<Api.Models.Repository>> ListRepositories(RepositoryFilter? filter);
 }

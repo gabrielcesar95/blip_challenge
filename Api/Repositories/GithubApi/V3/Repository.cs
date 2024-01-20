@@ -5,17 +5,19 @@ namespace Api.Repositories.GithubApi.V3;
 
 class Repository : BaseRepository, IRepository
 {
+    private string OrgName = "takenet";
+
     public async Task<IEnumerable<Models.Repository>> Get(RepositoryFilter? filter = null)
     {
         // TODO: Cache dos resultados e parâmetros recebidos
         // TODO: Concluir a filtragem (pós cache)
-        var response = await ListEntities<Models.Repository>("orgs/takenet/repos");
+        var response = await ListEntities<Models.Repository>(@$"orgs/{OrgName}/repos", filter);
         return response;
-
     }
-    public new async Task<IEnumerable<Repository>> ListEntities<Repository>(string path)
+
+    public new async Task<IEnumerable<Repository>> ListEntities<Repository>(string path, RepositoryFilter? filter)
     {
-        var rawResponse = await base.ListEntities<Repository>(path);
+        var rawResponse = await base.ListEntities<Repository>(path, filter);
 
         return rawResponse;
     }

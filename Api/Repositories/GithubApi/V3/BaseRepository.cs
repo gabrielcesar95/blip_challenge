@@ -1,5 +1,5 @@
 using Api.Repositories.GithubApi.V3.Contracts;
-using Api.Repositories.GithubApi.V3.Filters;
+using Api.Shared.Contracts;
 using Api.Shared.Support;
 
 namespace Api.Repositories.GithubApi.V3;
@@ -15,11 +15,11 @@ public class BaseRepository : IBaseRepository
         });
     }
 
-    public async Task<IEnumerable<T>> ListEntities<T>(string path, RepositoryFilter? filters = null)
+    public async Task<IEnumerable<T>> ListEntities<T>(string path, IFilter? filter = null)
     {
-        if (filters is not null)
+        if (filter is not null)
         {
-            filters.ToQueryString();
+            path = @$"{path}?{filter.ToQueryString()}";
         }
 
         var response = await Client.List<T>(path);
