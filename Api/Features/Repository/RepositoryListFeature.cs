@@ -18,8 +18,6 @@ class RepositoryListFeature : IRepositoryListFeature
         _Repository = repository;
     }
 
-
-    //TODO: Receber Parâmetros: Paginação
     public async Task<IEnumerable<Repository>> ListRepositories(RepositoryFilter? filter)
     {
         return await _Repository.Get(filter);
