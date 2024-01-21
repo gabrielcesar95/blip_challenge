@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Api.Models;
 using App.Features.Contracts.Repository;
+using Api.Repositories.GithubApi.V3.Filters;
 
 namespace Api.Controllers
 {
@@ -19,9 +20,16 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Repository>>> GetRepositoryItems()
+        public async Task<ActionResult<IEnumerable<Repository>>> RepositoriesList(string? language, int? page, int? resultsPerPage)
         {
-            var repositories = await _feature.ListRepositories().ConfigureAwait(false);
+            var filter = new RepositoryFilter()
+            {
+                language = language,
+                page = page,
+                perPage = resultsPerPage
+            };
+
+            var repositories = await _feature.ListRepositories(filter);
 
             return Ok(repositories);
         }

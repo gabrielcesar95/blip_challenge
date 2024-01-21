@@ -24,7 +24,7 @@ public class RestClient
         try
         {
             var response = await Client.GetAsync(path);
-            responseBody = response.Content.ReadFromJsonAsync<IEnumerable<T>>().Result; // TODO: Substituir esse Dynamic oor um generic type
+            responseBody = response.Content.ReadFromJsonAsync<IEnumerable<T>>().Result;
         }
         catch (Exception e)
         {

@@ -1,6 +1,7 @@
 
 using Api.Models;
 using Api.Repositories.GithubApi.Contracts;
+using Api.Repositories.GithubApi.V3.Filters;
 using App.Features.Contracts.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,10 @@ class RepositoryListFeature : IRepositoryListFeature
         _Repository = repository;
     }
 
-
-    //TODO: Receber Parâmetros: Linguagem e paginação
-    public async Task<IEnumerable<Repository>> ListRepositories() => await _Repository.Get();
+    public async Task<IEnumerable<Repository>> ListRepositories(RepositoryFilter? filter)
+    {
+        return await _Repository.Get(filter);
+    }
     public async Task<IEnumerable<Repository>> GetRepository() => throw new NotImplementedException();
 
 
