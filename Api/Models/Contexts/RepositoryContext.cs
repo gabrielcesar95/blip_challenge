@@ -9,5 +9,5 @@ public class RepositoryContext : DbContext
     {
     }
 
-    public DbSet<Repository> RepositoryItems { get; set; } = null!;
+    public DbSet<Repository> Repositories { get; set; } = null!;
 }
