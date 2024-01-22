@@ -20,13 +20,13 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Repository>>> RepositoriesList(string? language, int? page, int? resultsPerPage)
+        public async Task<ActionResult<IEnumerable<Repository>>> RepositoriesList(string? language, int? page, int? resultsPerPage = 5)
         {
             var filter = new RepositoryFilter()
             {
                 language = language,
                 page = page,
-                perPage = resultsPerPage
+                per_page = resultsPerPage
             };
 
             var repositories = await _feature.ListRepositories(filter);
