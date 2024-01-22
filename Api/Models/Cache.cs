@@ -1,6 +1,6 @@
 namespace Api.Models;
 
-// TODO: Implementar gerenciamento de cache
+// TODO(extra): Implementar gerenciamento de cache
 public class Cache
 {
     public long Id { get; set; }
