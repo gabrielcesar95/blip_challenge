@@ -31,6 +31,11 @@ namespace Api.Controllers
 
             var repositories = await _feature.ListRepositories(filter);
 
+            if (!repositories.Any())
+            {
+                return NoContent();
+            }
+
             return Ok(repositories);
         }
 
