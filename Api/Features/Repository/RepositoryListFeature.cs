@@ -1,32 +1,24 @@
 
 using Api.Models;
-using ILocalRepository = Api.Repositories.EntityFramework.InMemory.IRepository;
 using IApiRepository = Api.Repositories.GithubApi.Contracts.IRepository;
 using Api.Repositories.GithubApi.V3.Filters;
 using App.Features.Contracts.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace Api.Features;
 
 class RepositoryListFeature : IRepositoryListFeature
 {
     private readonly IApiRepository _ApiRepository;
-    private readonly ILocalRepository _LocalRepository;
 
-    public RepositoryListFeature(IApiRepository apiRepository, ILocalRepository localRepository)
+    public RepositoryListFeature(IApiRepository apiRepository)
     {
         _ApiRepository = apiRepository;
-        _LocalRepository = localRepository;
     }
 
     public async Task<IEnumerable<Repository>> ListRepositories(RepositoryFilter? filter)
     {
-        // TODO (extra): Obter repositórios do Cache
+        // TODO (extra): Salvar/manter os dados num banco local (Api.Repositories.EntityFramework.InMemory)
         var repositoriesFromApi = await _ApiRepository.Get(filter);
-
-        //TESTES
-        var singleRepo = repositoriesFromApi.FirstOrDefault();
-        await _LocalRepository.New(singleRepo);
 
         return repositoriesFromApi;
     }

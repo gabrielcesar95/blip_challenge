@@ -3,8 +3,10 @@ using Api.Shared.Contracts;
 
 namespace Api.Shared.Support;
 
-public class Filter : IFilter
+public abstract class Filter : IFilter
 {
+    public abstract List<string> LocalParams { get; }
+
     public string ToQueryString()
     {
         var properties = from p in this.GetType().GetProperties()
@@ -13,4 +15,14 @@ public class Filter : IFilter
 
         return string.Join("&", properties.ToArray());
     }
+
+    public List<string> GetFilteredParams()
+    {
+        var properties = from p in this.GetType().GetProperties()
+                         where p.GetValue(this, null) is not null && LocalParams.Contains(p.Name)
+                         select p.Name;
+
+        return properties.ToList();
+    }
+
 }

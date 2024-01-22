@@ -9,9 +9,16 @@ class Repository : BaseRepository, IRepository
 
     public async Task<IEnumerable<Models.Repository>> Get(RepositoryFilter? filter = null)
     {
-        // TODO: Cache dos resultados e parâmetros recebidos
-        // TODO: Concluir a filtragem (pós cache)
+        // TODO (extra): Cache dos resultados e parâmetros recebidos
         var response = await ListEntities<Models.Repository>(@$"orgs/{OrgName}/repos", filter);
+
+        // TODO (extra): Tornar a filtragem mais dinâmica
+        if (filter?.language is not null)
+        {
+            var filteredResponse = response.Where(r => r.language == filter.language);
+            return filteredResponse;
+        }
+
         return response;
     }
 
